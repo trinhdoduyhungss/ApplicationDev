@@ -1,12 +1,17 @@
-
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ApplicationDev.Data;
 using ApplicationDev.Models;
-using System.Linq;using Microsoft.AspNetCore.Mvc;
+using ApplicationDev.Service.IService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApplicationDev.Controllers
 {
