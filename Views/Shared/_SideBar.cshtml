@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+        asp-action="Index" asp-controller="Home" asp-area="">
+        <i class="fas fa-chalkboard-teacher fa-lg"></i>
+        <div class="sidebar-brand-text mx-2">FPT Book</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Heading -->
+    <div class="sidebar-heading mt-2">
+        Management
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserManage" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="far fa-address-card"></i>
+            <span>Personal Managerment</span>
+        </a>
+        <div id="collapseUserManage" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Function</h6>
+
+                <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-circle mx-2"></i>Profile</a>
+                <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/ChangePassword"><i class="fas fa-lock mx-2"></i>Password</a>
+                @if (User.IsInRole("Admin"))
+                                    {
+                                        
+                                        <a class="collapse-item" asp-controller="User" asp-action="UserRolesDetail" ><i class="fas fa-list mx-2"></i>Assign roles</a>
+                                    }
+                                            @if (User.IsInRole("StoreOwner"))
+                                    {
+                                        <a class="collapse-item" asp-controller="Store" asp-action="Index"><i class="fas fa-list mx-2"></i>Store</a>
+                                    }
+                @if (hasExternalLogins)
+                {
+                    <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/ExternalLogins">External logins</a>
+                }
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Heading -->
+    <div class="sidebar-heading mt-2">
+        Posts
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+</ul>
+<!-- End of Sidebar -->
