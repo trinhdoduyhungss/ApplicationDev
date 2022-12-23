@@ -15,6 +15,9 @@ namespace ApplicationDev.Models
         public decimal Price { get; set; }
         public string? Desc { get; set; }
         public string? ImgUrl { get; set; }
+        public int StoreId { get; set; }
+        public Store? Store { get; set; }
+        [NotMapped]
         public  IEnumerable<SelectListItem>? ProductCategoryList { get; set; }
         [NotMapped]
         public  IEnumerable<SelectListItem>? StoreList { get; set; }
