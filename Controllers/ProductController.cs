@@ -9,6 +9,8 @@ using ApplicationDev.Models;
 using ApplicationDev.Service.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +23,8 @@ namespace ApplicationDev.Controllers
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IProductService _productService;
         private readonly ApplicationDbContext _context;
-    public ProductController(IProductService productService, IWebHostEnvironment hostEnvironment, ApplicationDbContext context,IHttpContextAccessor httpContextAccessor)
+
+        public ProductController(IProductService productService, IWebHostEnvironment hostEnvironment, ApplicationDbContext context,IHttpContextAccessor httpContextAccessor)
         {
             _productService = productService;
             _hostEnvironment = hostEnvironment;
@@ -34,8 +37,22 @@ namespace ApplicationDev.Controllers
             var obj = await _productService.GetAll();
             return View(obj);
         }
-    }
-    [HttpPost]
+
+        public IActionResult Create()
+        {
+            var objId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Product product = new Product()
+            {
+                StoreList = _context.Stores.Where(x => x.UserId == objId).ToList().Select(x=> new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name
+                }),
+            };
+            return View(product);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
             //Save Image To wwwRoot
@@ -61,4 +78,15 @@ namespace ApplicationDev.Controllers
             ViewBag.ProductName = product.Name;
             return View();
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> ProductInStore(int id)
+        {
+            var obj = _context.Products
+                .Include(x => x.Store)
+                .Where(x => x.StoreId == id);
+            return View(obj);
+        }
+    
+    }
 }
