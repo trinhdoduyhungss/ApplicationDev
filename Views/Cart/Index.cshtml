@@ -1,0 +1,101 @@
+﻿@model List<ApplicationDev.Models.CartItem>
+
+<body>
+	@if (Model.Count > 0)
+	{
+		decimal total = 0;
+		int stt = 1;
+		<!-- cart -->
+		<div class="cart-section mt-150 mb-150">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-md-12">
+						<div class="cart-table-wrap">
+							<table class="cart-table">
+								<thead class="cart-table-head">
+									<tr class="table-head-row">
+										<th class="product-remove"></th>
+										<th class="product-image">Product Image</th>
+										<th class="product-name">Name</th>
+										<th class="product-price">Price</th>
+										<th class="product-quantity">Quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var cartItem in Model)
+									{
+										string txt_class = "quantity_" + cartItem.Product.Id;
+
+										var totals = cartItem.Quantity * cartItem.Product.Price;
+										total += totals;
+										<tr class="table-body-row">
+											<td class="product-remove">
+												<a asp-action="RemoveCart"
+											asp-route-productid="@cartItem.Product.Id" class="btn btn-danger">X</a>
+												<a href="" data-id="@cartItem.Product.Id"
+											class="btn btn-success updateCart">Update Cart</a>
+											</td>
+											<td class="product-image"><a href=""><img
+												src="@(cartItem.Product.ImgUrl)" asp-append-version="true"
+												width="50px" height="50px"></a></td>
+											<td class="product-name">@cartItem.Product.Title</td>
+											<td class="product-price">@cartItem.Product.Price $</td>
+											<td class="product-quantity"><input type="number" class="@txt_class"
+											value="@cartItem.Quantity" id="@($"quantity-{cartItem.Product.Id}")" /></td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="col-lg-4">
+						<div class="total-section">
+							<table class="total-table">
+								<thead class="total-table-head">
+									<tr class="table-total-row">
+										<th>Total</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="total-data">
+										<td><strong>Total: </strong></td>
+										<td>@(total.ToString("n0"))</td>
+								</tbody>
+							</table>
+							<div class="cart-buttons">
+								<a asp-controller="Cart" asp-action="Checkout" class="boxed-btn black">Check Out</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end cart -->
+		@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$(".updateCart").click(function (event) {
+				event.preventDefault();
+				var quantity = $(".quantity_" + $(this).attr("data-id")).val();
+				console.log(quantity);
+				$.ajax({
+					type: "POST",
+					url: "@Url.Action("UpdateCart","Cart")",
+					data: {
+						id: $(this).attr("data-id"),
+						quantity: quantity
+					},
+					success: function (result) {
+						window.location.href = '@Url.Action("Index","Cart")';
+					}
+				});
+			});
+		});
+	</script>
+
+	}
+	}
+</body>

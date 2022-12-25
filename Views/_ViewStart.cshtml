@@ -1,9 +1,5 @@
 ﻿@{
     Layout = "_Layout";
-    if (User.IsInRole("StoreOwner"))
-    {
-        Layout = "_AdminLayout";
-    }
     if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
     {
         Layout = "_AdminLayout";

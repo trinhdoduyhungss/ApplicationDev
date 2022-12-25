@@ -1,0 +1,53 @@
+@model IEnumerable<ApplicationDev.Models.OrderDetail>
+@{
+    List<Product> products = ViewBag.Products;
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Code
+            </th>
+            <th>
+                Create At
+            </th>
+            <th>
+                Quantity of Order
+            </th>
+            <th>
+                Price of Order
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @foreach (var product in products)
+            {
+                if (product.Id == item.ProductId)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Price)
+                    </td>
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

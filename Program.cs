@@ -6,7 +6,6 @@ using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGeneration.Design;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,17 +57,13 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Add service for notification
 builder.Services.AddNotyf(config=> { config.DurationInSeconds = 10;config.IsDismissable = true;config.Position = NotyfPosition.TopRight; });
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-// Add services Razor Pages
-builder.Services.AddRazorPages();
-
 // Dependency Injection
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

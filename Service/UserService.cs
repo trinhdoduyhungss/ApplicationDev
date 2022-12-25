@@ -3,6 +3,7 @@ using ApplicationDev.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 
 namespace ApplicationDev.Service
 {
@@ -15,10 +16,22 @@ namespace ApplicationDev.Service
             _roleManager = roleManager;
             _userManager = userManager;
         }
+        
         public async Task<List<IdentityRole>> GetAll()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return roles;
+        }
+
+        public async Task<IList<ApplicationUser>> GetManagers()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("Admin");
+            var users1 = await _userManager.GetUsersInRoleAsync("SuperAdmin");
+            var users2 = await _userManager.GetUsersInRoleAsync("StoreOwner");
+            users.AddRange(users1);
+            users.AddRange(users2);
+            users = users.DistinctBy(x => x.Id).ToList();
+            return users;
         }
 
         public async Task<string> AddRole(string roleName)

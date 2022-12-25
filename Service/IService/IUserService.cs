@@ -6,6 +6,7 @@ namespace ApplicationDev.Service.IService
     public interface IUserService
     {
         public Task<List<IdentityRole>> GetAll();
+        public Task<IList<ApplicationUser>> GetManagers();
         public Task<string> AddRole(string name);
         public Task<List<UserManagerVM>> UserRolesDetail();
         public Task<List<RolesManagerVM>> ViewManagerUserRole(string userId);
