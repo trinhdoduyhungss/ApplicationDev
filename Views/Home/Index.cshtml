@@ -1,8 +1,41 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome FPT Shop Book</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+﻿@model IEnumerable<ApplicationDev.Models.Product>
+@if (User.IsInRole("StoreOwner"))
+{
+	<div class="text-center">
+<h1 class="display-4">Welcome</h1>
+<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+}
+else
+{
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Our</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				@foreach (var item in Model) {
+    
+					<div class="col-lg-4 col-md-6 text-center">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a href=""><img src="@("~/image/" + item.ImgUrl)" asp-append-version="true" width="250px" height="250px"></a>
+							</div>
+							<h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+							<p class="product-price"><span></span>@Html.DisplayFor(modelItem => item.Price) $</p>
+							<a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.Id" class="cart-btn"><i class="fa fa-cart-plus" aria-hidden="true"></i>
+								Add to Cart</a>
+						</div>
+					</div>
+   
+				}
+			</div>
+		</div>
+	</div>
+
+}
