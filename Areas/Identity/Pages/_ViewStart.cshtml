@@ -1,4 +1,7 @@
-
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
+    if (User.IsInRole("StoreOwner") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+    {
+        Layout = "/Views/Shared/_AdminLayout.cshtml";
+    }
 }
