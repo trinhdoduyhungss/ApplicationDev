@@ -13,8 +13,6 @@ namespace ApplicationDev.Data.Initializer
                 Email = "superadmin@gmail.com",
                 FirstName = "Trinh",
                 LastName = "Hung",
-                EmailConfirmed = true, 
-                PhoneNumberConfirmed = true
             };
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {
@@ -22,6 +20,7 @@ namespace ApplicationDev.Data.Initializer
                 if (user == null)
                 {
                     await userManager.CreateAsync(defaultUser, "Password@123");
+                    await userManager.AddToRoleAsync(defaultUser, Enum.Roles.Admin.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Enum.Roles.SuperAdmin.ToString());
                 }
             }

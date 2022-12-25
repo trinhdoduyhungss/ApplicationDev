@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApplicationDev.Data
-{   // dotnet aspnet-codegenerator identity -dc ApplicationDev.Data.ApplicationDbContext
+{
     // ApplicationDev.Data.ApplicationDbContext
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -17,7 +17,17 @@ namespace ApplicationDev.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new StoreConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
         }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
         
     }
 }
