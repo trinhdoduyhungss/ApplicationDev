@@ -61,7 +61,6 @@ namespace ApplicationDev.Service
                 _context.Products.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            Console.WriteLine(obj.StoreId);
             return obj;
         }
 
