@@ -18,8 +18,6 @@ namespace ApplicationDev.Models
         public int StoreId { get; set; }
         public Store? Store { get; set; }
         [NotMapped]
-        public  IEnumerable<SelectListItem>? ProductCategoryList { get; set; }
-        [NotMapped]
         public  IEnumerable<SelectListItem>? StoreList { get; set; }
     }
 }

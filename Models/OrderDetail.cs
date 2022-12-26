@@ -14,6 +14,5 @@ namespace ApplicationDev.Models
         public decimal Total { get; set; }
         public DateTime CreateAt { get; set; }
         public OrderItem? OrderItem { get; set; }
-        public Store? Store { get; set; }
     }
 }

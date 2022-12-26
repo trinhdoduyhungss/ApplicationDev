@@ -9,8 +9,8 @@
 
     <!-- Sidebar - Brand -->
 
-    <a class="sidebar-brand d-flex align-items-center justify-content-center"
-        asp-action="Index" asp-controller="Home" asp-area="">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-action="Index" asp-controller="Home"
+        asp-area="">
         <i class="fas fa-chalkboard-teacher fa-lg"></i>
         <div class="sidebar-brand-text mx-2">FPT Book</div>
     </a>
@@ -25,7 +25,8 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserManage" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserManage"
+            aria-expanded="true" aria-controls="collapseTwo">
             <i class="far fa-address-card"></i>
             <span>Personal Managerment</span>
         </a>
@@ -33,20 +34,25 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Function</h6>
 
-                <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-circle mx-2"></i>Profile</a>
-                <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/ChangePassword"><i class="fas fa-lock mx-2"></i>Password</a>
+                <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/Index"><i
+                        class="fas fa-user-circle mx-2"></i>Profile</a>
+                <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/ChangePassword"><i
+                        class="fas fa-lock mx-2"></i>Password</a>
                 @if (User.IsInRole("Admin"))
-                                    {
-                                        
-                                        <a class="collapse-item" asp-controller="User" asp-action="UserRolesDetail" ><i class="fas fa-list mx-2"></i>Assign roles</a>
-                                    }
-                                            @if (User.IsInRole("StoreOwner"))
-                                    {
-                                        <a class="collapse-item" asp-controller="Store" asp-action="Index"><i class="fas fa-list mx-2"></i>Store</a>
-                                    }
+                {
+
+                    <a class="collapse-item" asp-controller="User" asp-action="UserRolesDetail"><i
+                        class="fas fa-list mx-2"></i>Assign roles</a>
+                }
+                @if (User.IsInRole("StoreOwner"))
+                {
+                    <a class="collapse-item" asp-controller="Store" asp-action="Index"><i
+                        class="fas fa-list mx-2"></i>Store</a>
+                }
                 @if (hasExternalLogins)
                 {
-                    <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/ExternalLogins">External logins</a>
+                    <a class="collapse-item " asp-area="Identity" asp-page="/Account/Manage/ExternalLogins">External
+                        logins</a>
                 }
             </div>
         </div>
@@ -60,7 +66,7 @@
         Posts
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
-    
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

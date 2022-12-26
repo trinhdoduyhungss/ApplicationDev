@@ -1,8 +1,13 @@
 @model IEnumerable<ApplicationDev.Models.Product>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@{
+    if (User.IsInRole("Admin") || User.IsInRole("StoreOwner"))
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+}
 <table class="table">
     <thead>
         <tr>
@@ -45,7 +50,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Category)
                 </td>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>

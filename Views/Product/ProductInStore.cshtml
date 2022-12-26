@@ -23,6 +23,12 @@
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Pages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desc)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             @{
@@ -36,32 +42,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td><img src="@(item.ImgUrl)" asp-append-version="true" width="250px" height="250px">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            @{
-                if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("StoreOwner"))
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
+        @foreach (var item in Model) {
+            <tr>
+                <td><img src="@(item.ImgUrl)" asp-append-version="true" width="250px" height="250px">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                @{
+                    if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("StoreOwner"))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    }
                 }
-            }
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 </table>

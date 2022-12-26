@@ -14,7 +14,6 @@ namespace ApplicationDev.Models
         public string? Name { get; set; }
         public string? ImageUrl { get; set; }
         public ICollection<Product>? Products { get; set; }
-        public ICollection<OrderDetail>? OrderDetails { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }
         [NotMapped]
         public  IEnumerable<SelectListItem>? UserList { get; set; }
