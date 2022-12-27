@@ -46,9 +46,8 @@ namespace ApplicationDev.Controllers
         [HttpGet]
         public IActionResult OrderDetails(int id)
         {
+            var obj = _context.OrderDetails.Where(x => x.OrderId == id).ToList();
             ViewBag.Products = _context.Products.ToList();
-            
-            var obj = _context.OrderDetails.ToList();
             return View(obj);
         }
     }

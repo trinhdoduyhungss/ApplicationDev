@@ -24,30 +24,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            @foreach (var product in products)
-            {
-                if (product.Id == item.ProductId)
+        @foreach (var item in Model) {
+            <tr>
+                @foreach (var product in products)
                 {
-                    <td>
-                        @Html.DisplayFor(modelItem => product.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => product.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => product.Price)
-                    </td>
+                    if (product.Id == item.ProductId)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Price)
+                        </td>
+                    }
                 }
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
